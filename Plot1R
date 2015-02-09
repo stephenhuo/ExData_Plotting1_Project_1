@@ -1,0 +1,21 @@
+
+
+## Read data
+household_data <- read.csv ("household_power_consumption.txt", sep = ";", na.strings="?")
+household_data <- as.data.frame(household_data)
+
+## generate sub_set considering the frame time 2007-02-01 to 2007-02-02
+sub_set <- subset(household_data, as.Date(Date,format="%d/%m/%Y") == as.Date("01/02/2007", format="%d/%m/%Y") | 
+                          as.Date(Date,format="%d/%m/%Y") == as.Date("02/02/2007",format="%d/%m/%Y"))
+
+## Plot histogram
+
+## Define size and plot the data to default directory
+png(file="plot1.png",width=480,height=480,bg=NA,units="px")
+
+hist(as.numeric(sub_set$Global_active_power), 
+     col="red", main="Global Active Power", xlab="Global Active Power in (kilowatts)", 
+     ylim=c(0,1200))
+
+## Close off graphic device
+dev.off()
